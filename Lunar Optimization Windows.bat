@@ -1,4 +1,5 @@
 @echo off
+color 4
 set GRAAL_SETUP_FILE=%USERPROFILE%\.graallcsetup.txt
 
 if exist "%GRAAL_SETUP_FILE%" (
@@ -17,6 +18,7 @@ if exist "%GRAAL_SETUP_FILE%" (
     echo creating setup file to indicate that JRE is installed
     echo JRE is installed > "%GRAAL_SETUP_FILE%"
 )
+color 2
 echo Launching Lunarclient
 cd "%USERPROFILE%\.lunarclient\offline\multiver\"
 "%USERPROFILE%\graal\bin\java" ^
