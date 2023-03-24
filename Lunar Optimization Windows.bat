@@ -17,7 +17,7 @@ if exist "%GRAAL_SETUP_FILE%" (
     echo creating setup file to indicate that JRE is installed
     echo JRE is installed > "%GRAAL_SETUP_FILE%"
 )
-
+echo Launching Lunarclient
 cd "%USERPROFILE%\.lunarclient\offline\multiver\"
 "%USERPROFILE%\graal\bin\java" ^
     --add-modules jdk.naming.dns ^
