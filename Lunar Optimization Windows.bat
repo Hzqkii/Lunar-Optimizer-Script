@@ -4,17 +4,17 @@ set GRAAL_SETUP_FILE=%USERPROFILE%\.graallcsetup.txt
 if exist "%GRAAL_SETUP_FILE%" (
     echo JRE is already installed, skipping installation
 ) else (
-    :: download GraalVM zip file
+    echo downloading GraalVM zip file
     powershell -command "& { Invoke-WebRequest -Uri 'https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-windows-amd64-22.3.1.zip' -OutFile '%USERPROFILE%\graalvm.zip' }"
 
-    :: extract files to user directory and rename folder
+    echo extracting files to user directory and rename folder
     powershell -command "& { Expand-Archive -Path '%USERPROFILE%\graalvm.zip' -DestinationPath '%USERPROFILE%\' }"
     powershell -command "& { Rename-Item -Path '%USERPROFILE%\graalvm-ce-java17-22.3.1' -NewName 'graal' }"
 
-    :: set environment variable for GraalVM location
+    echo setting environment variable for GraalVM location
     setx GRAALVM_HOME "%USERPROFILE%\graal"
 
-    :: create setup file to indicate that JRE is installed
+    echo creating setup file to indicate that JRE is installed
     echo JRE is installed > "%GRAAL_SETUP_FILE%"
 )
 
