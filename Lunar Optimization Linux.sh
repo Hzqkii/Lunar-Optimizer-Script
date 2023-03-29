@@ -20,6 +20,11 @@ else
     echo "JRE is installed" > "$GRAAL_SETUP_FILE"
 fi
 
+echo Downloading working version of lwjgl64
+wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/prerequisites/liblwjgl64.so" -P "$HOME"
+echo "Moving and replacing the lwjgl64.so file"
+mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
+
 echo "Launching Lunarclient"
 cd "$HOME/.lunarclient/offline/multiver/"
 "$HOME/graal/bin/java" \
@@ -43,4 +48,4 @@ cd "$HOME/.lunarclient/offline/multiver/"
     --height 720 \
     --workingDirectory . \
     --classpathDir . \
-    --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar:lunar-lang.jar:lunar.jar:optifine-0.1.0-SNAPSHOT-all.jar:common-0.1.0-SNAPSHOT-all.jar"
+    --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar"
