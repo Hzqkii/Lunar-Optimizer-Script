@@ -36,7 +36,7 @@ gamemoderun \
     --add-opens java.base/java.io=ALL-UNNAMED \
     -Djava.library.path=natives \
     -Dlog4j2.formatMsgNoLookups=true \
-    -Xmx3G -Xms3G -Xmn1G -javaagent:/home/hzqki/Downloads/solar-engine.jar=/home/hzqki/Downloads/config.json \
+    -Xmx3G -Xms3G -Xmn1G \
     -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+AlwaysActAsServerClassMachine -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+UseNUMA -XX:AllocatePrefetchStyle=3 \
     -XX:NmethodSweepActivity=1 -XX:ReservedCodeCacheSize=400M -XX:NonNMethodCodeHeapSize=12M -XX:ProfiledCodeHeapSize=194M -XX:NonProfiledCodeHeapSize=194M -XX:-DontCompileHugeMethods \
     -XX:+PerfDisableSharedMem -XX:+UseFastUnorderedTimeStamps -XX:+UseCriticalJavaThreadPriority -XX:+EagerJVMCI -XX:+UseG1GC -XX:MaxGCPauseMillis=37 -XX:+PerfDisableSharedMem \
