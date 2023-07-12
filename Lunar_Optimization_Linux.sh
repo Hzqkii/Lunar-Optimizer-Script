@@ -6,7 +6,7 @@ if [ -f "$GRAAL_SETUP_FILE" ]; then
     echo "JRE is already installed, skipping installation"
 else
     echo "downloading GraalVM zip file"
-    wget -q "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz" -P "$HOME"
+    wget -q "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz" -P "$HOME"
 
     echo "extracting files to user directory and rename folder"
     tar -xzf "$HOME/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz" -C "$HOME"
