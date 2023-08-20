@@ -1,5 +1,6 @@
 #!/bin/bash
 
+LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
 GRAAL_SETUP_FILE="$HOME/.graallcsetup.txt"
 
 if [ -f "$GRAAL_SETUP_FILE" ]; then
@@ -24,6 +25,10 @@ echo Downloading working version of lwjgl64
 wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/prerequisites/liblwjgl64.so" -P "$HOME"
 echo "Moving and replacing the lwjgl64.so file"
 mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
+
+password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
+echo "$password" | sudo -S echo "Password entered." #test
+echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
 
 echo "Launching Lunarclient"
 cd "$HOME/.lunarclient/offline/multiver/"
@@ -55,3 +60,5 @@ gamemoderun \
     --workingDirectory . \
     --classpathDir . \
     --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar"
+
+echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket
