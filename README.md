@@ -8,9 +8,9 @@ These Scripts add more functionality to lunar client, such as better fps limiter
 
 ### Dependencies(Linux):
 
-**1.**wget
-**2.**gamemode (github.com/FeralInteractive/gamemode)
-**3.**MangoHUD (github.com/flightlessmango/MangoHud)
+**1.** wget
+**2.** gamemode (github.com/FeralInteractive/gamemode)
+**3.** MangoHUD (github.com/flightlessmango/MangoHud)
 
 ### Dependencies(Windows):
 **1.** PowerShell
