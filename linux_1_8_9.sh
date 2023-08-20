@@ -1,29 +1,31 @@
 #!/bin/bash
 
+LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
 GRAAL_SETUP_FILE="$HOME/.graallcsetup.txt"
 
 if [ -f "$GRAAL_SETUP_FILE" ]; then
     echo "JRE is already installed, skipping installation"
 else
     echo "downloading GraalVM zip file"
-    wget -q "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz" -P "$HOME"
+    wget -q "https://download.oracle.com/graalvm/17/latest/graalvm-jdk-17_linux-x64_bin.tar.gz" -P "$HOME" | zenity --progress --pulsate --title="Installing GraalVM" --text="Downloading JDK..." --auto-close
 
     echo "extracting files to user directory and rename folder"
-    tar -xzf "$HOME/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz" -C "$HOME"
-    mv "$HOME/graalvm-ce-java17-22.3.1" "$HOME/graal"
-
-    echo "setting environment variable for GraalVM location"
-    echo "export GRAALVM_HOME=$HOME/graal" >> ~/.bashrc
-    source ~/.bashrc
+    tar -xzf "$HOME/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz" -C "$HOME" | zenity --progress --pulsate --title="Installing GraalVM" --text="Extracting files..." --auto-close
+    mv "$HOME/graalvm-ce-java17-22.3.1" "$HOME/graal" | zenity --progress --pulsate --title="Installing GraalVM" --text="Renaming Files..." --auto-close
 
     echo "creating setup file to indicate that JRE is installed"
     echo "JRE is installed" > "$GRAAL_SETUP_FILE"
+    
 fi
 
 echo Downloading working version of lwjgl64
 wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/prerequisites/liblwjgl64.so" -P "$HOME"
 echo "Moving and replacing the lwjgl64.so file"
 mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
+
+password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
+echo "$password" | sudo -S echo "Password entered." #test
+echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
 
 echo "Launching Lunarclient"
 cd "$HOME/.lunarclient/offline/multiver/"
@@ -56,3 +58,5 @@ gamemoderun \
     --classpathDir . \
     --ichorClassPath "lunar-lang.jar,lunar-emote.jar,lunar.jar,optifine-0.1.0-SNAPSHOT-all.jar,v1_8-0.1.0-SNAPSHOT-all.jar,common-0.1.0-SNAPSHOT-all.jar,genesis-0.1.0-SNAPSHOT-all.jar" \
     --ichorExternalFiles OptiFine_v1_8.jar
+
+echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket

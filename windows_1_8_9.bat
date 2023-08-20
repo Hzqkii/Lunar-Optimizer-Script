@@ -1,6 +1,9 @@
 @echo off
 color 4
 set GRAAL_SETUP_FILE=%USERPROFILE%\.graallcsetup.txt
+set "websocket=websocket.lunarclientprod.com"
+set "localh=127.0.0.1"
+setlocal enabledelayedexpansion
 
 if exist "%GRAAL_SETUP_FILE%" (
     echo JRE is already installed, skipping installation
@@ -18,7 +21,20 @@ if exist "%GRAAL_SETUP_FILE%" (
     echo creating setup file to indicate that JRE is installed
     echo JRE is installed > "%GRAAL_SETUP_FILE%"
 )
-color 2
+
+:: Check if the script is run as administrator
+net session >nul 2>&1
+if %errorLevel% == 0 (
+    echo Running as administrator
+) else (
+    echo Elevating script...
+    cmd /min /C "set __ELEVATED_CMDLINE=1 && %~dpnx0"
+    exit /b
+)
+
+copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
+echo %localh% %websocket%>> %SystemRoot%\System32\drivers\etc\hosts
+
 echo Launching Lunarclient
 cd "%USERPROFILE%\.lunarclient\offline\multiver\"
 "%USERPROFILE%\graal\bin\java" ^
@@ -39,7 +55,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     com.moonsworth.lunar.genesis.Genesis ^
     --version 1.8.9 ^
     --accessToken 0 ^
-    --assetIndex 1.89 ^
+    --assetIndex 1.8.9 ^
     --userProperties {} ^
     --gameDir "%USERPROFILE%\.minecraft" ^
     --texturesDir "%USERPROFILE%\.lunarclient\textures" ^
@@ -49,3 +65,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --classpathDir . ^
     --ichorClassPath "lunar-lang.jar;lunar-emote.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;v1_8-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar;genesis-0.1.0-SNAPSHOT-all.jar" ^
     --ichorExternalFiles OptiFine_v1_8.jar
+
+    findstr /v "%localh% %websocket%" %SystemRoot%\System32\drivers\etc\hosts > %SystemRoot%\System32\drivers\etc\hosts_temp
+    move /y %SystemRoot%\System32\drivers\etc\hosts_temp %SystemRoot%\System32\drivers\etc\hosts
+pause
