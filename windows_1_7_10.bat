@@ -27,9 +27,8 @@ net session >nul 2>&1
 if %errorLevel% == 0 (
     echo Running as administrator
 ) else (
-    echo Elevating script...
-    cmd /min /C "set __ELEVATED_CMDLINE=1 && %~dpnx0"
-    exit /b
+    echo RUN SCRIPT AS ADMIN TO FIX ANNOYING POPUP
+    pause
 )
 
 copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
@@ -51,7 +50,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     -XX:G1RSetUpdatingPauseTimePercent=0 -XX:MaxTenuringThreshold=1 -XX:G1SATBBufferEnqueueingThresholdPercent=30 -XX:G1ConcMarkStepDurationMillis=5.0 -XX:G1ConcRSHotCardLimit=16 -XX:G1ConcRefinementServiceIntervalMillis=150 -XX:GCTimeRatio=99 ^
     -XX:+UseStringDeduplication -XX:+UseCompressedOops -XX:+UseCompressedClassPointers -XX:CompileThreshold=10000 -XX:InlineSmallCode=2000 -XX:+OptimizeStringConcat -XX:+UseBiasedLocking -XX:+UseLargePages -XX:+UseAdaptiveSizePolicy ^
     -XX:+UseTLAB -XX:TLABSize=256k -XX:PretenureSizeThreshold=512k -XX:MaxInlineSize=300 -XX:LoopUnrollLimit=60 -XX:+TieredCompilation ^
-    -cp "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar" ^
+    -cp "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar;genesis-0.1.0-SNAPSHOT-all.jar;OptiFine_1.7.10_HD_U_E7" ^
     com.moonsworth.lunar.genesis.Genesis ^
     --version 1.7.10 ^
     --accessToken 0 ^
@@ -63,9 +62,8 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --height 720 ^
     --workingDirectory . ^
     --classpathDir . ^
-    --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar" ^
-    --ichorExternalFiles OptiFine_v1_8.jar
-
+    --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;common-0.1.0-SNAPSHOT-all.jar"
+    --ichorExternalFiles OptiFine_v1_7.jar
     findstr /v "%localh% %websocket%" %SystemRoot%\System32\drivers\etc\hosts > %SystemRoot%\System32\drivers\etc\hosts_temp
     move /y %SystemRoot%\System32\drivers\etc\hosts_temp %SystemRoot%\System32\drivers\etc\hosts
 pause
