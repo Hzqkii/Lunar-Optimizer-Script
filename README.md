@@ -16,3 +16,5 @@ These Scripts add more functionality to lunar client, such as better fps limiter
 
 ### Dependencies(Windows):
 **1.** PowerShell
+
+**2.** (optional) Consider using bat2exe to make an hidden cmdline executable.

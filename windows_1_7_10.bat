@@ -1,8 +1,8 @@
 @echo off
 color 4
 set GRAAL_SETUP_FILE=%USERPROFILE%\.graallcsetup.txt
-set "websocket=websocket.lunarclientprod.com"
-set "localh=127.0.0.1"
+::set "websocket=websocket.lunarclientprod.com"
+::set "localh=127.0.0.1"
 setlocal enabledelayedexpansion
 
 if exist "%GRAAL_SETUP_FILE%" (
@@ -23,16 +23,16 @@ if exist "%GRAAL_SETUP_FILE%" (
 )
 
 :: Check if the script is run as administrator
-net session >nul 2>&1
-if %errorLevel% == 0 (
-    echo Running as administrator
-) else (
-    echo RUN SCRIPT AS ADMIN TO FIX ANNOYING POPUP
-    pause
-)
+::net session >nul 2>&1
+::if %errorLevel% == 0 (
+::    echo Running as administrator
+::) else (
+::    echo RUN SCRIPT AS ADMIN TO FIX ANNOYING POPUP
+::    pause
+::)
 
-copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
-echo %localh% %websocket%>> %SystemRoot%\System32\drivers\etc\hosts
+::copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
+::echo %localh% %websocket%>> %SystemRoot%\System32\drivers\etc\hosts
 
 echo Launching Lunarclient
 cd "%USERPROFILE%\.lunarclient\offline\multiver\"
@@ -55,6 +55,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --version 1.7.10 ^
     --accessToken 0 ^
     --assetIndex 1.7.10 ^
+    --launcherVersion 3.0.10 \
     --userProperties {} ^
     --gameDir "%USERPROFILE%\.minecraft" ^
     --texturesDir "%USERPROFILE%\.lunarclient\textures" ^

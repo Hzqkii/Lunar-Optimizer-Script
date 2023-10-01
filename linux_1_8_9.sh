@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
+#LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
 GRAAL_SETUP_FILE="$HOME/.graallcsetup.txt"
 
 if [ -f "$GRAAL_SETUP_FILE" ]; then
@@ -13,6 +13,10 @@ else
     tar -xzf "$HOME/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz" -C "$HOME" | zenity --progress --pulsate --title="Installing GraalVM" --text="Extracting files..." --auto-close
     mv "$HOME/graalvm-ce-java17-22.3.1" "$HOME/graal" | zenity --progress --pulsate --title="Installing GraalVM" --text="Renaming Files..." --auto-close
 
+#    echo "Downloading Lunar Client Agents"
+#    mkdir $HOME/.lunar-client-agents
+#    wget -q "https://github.com/Nilsen84/lunar-client-agents/releases/download/v1.2.0/HitDelayFix.jar" -P "$HOME/.lunar-client-agents" | zenity --progress --pulsate --title="Installing Agents" --text="Downloading Agents" --auto-close
+
     echo "creating setup file to indicate that JRE is installed"
     echo "JRE is installed" > "$GRAAL_SETUP_FILE"
     
@@ -23,13 +27,16 @@ wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/p
 echo "Moving and replacing the lwjgl64.so file"
 mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
 
-password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
-echo "$password" | sudo -S echo "Password entered." #test
-echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
+#password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
+#echo "$password" | sudo -S echo "Password entered." #test
+#echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
 
 echo "Launching Lunarclient"
 cd "$HOME/.lunarclient/offline/multiver/"
+#env OBS_VKCAPTURE=1 \
 gamemoderun \
+#env LD_PRELOAD="libpthread.so.0 libGL.so.1" __GL_THREADED_OPTIMIZATIONS=0 \
+MANGOHUD_DLSYM=1 mangohud --dlsym \
 "$HOME/graal/bin/java" \
     --add-modules jdk.naming.dns \
     --add-exports jdk.naming.dns/com.sun.jndi.dns=java.naming \
@@ -48,6 +55,7 @@ gamemoderun \
     com.moonsworth.lunar.genesis.Genesis \
     --version 1.8.9 \
     --accessToken 0 \
+    --launcherVersion 3.1.0 \
     --assetIndex 1.8 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \
@@ -58,5 +66,4 @@ gamemoderun \
     --classpathDir . \
     --ichorClassPath "lunar-lang.jar,lunar-emote.jar,lunar.jar,optifine-0.1.0-SNAPSHOT-all.jar,v1_8-0.1.0-SNAPSHOT-all.jar,common-0.1.0-SNAPSHOT-all.jar,genesis-0.1.0-SNAPSHOT-all.jar" \
     --ichorExternalFiles OptiFine_v1_8.jar
-
-echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket
+#echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com"
+#LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com"
 GRAAL_SETUP_FILE="$HOME/.graallcsetup.txt"
 
 if [ -f "$GRAAL_SETUP_FILE" ]; then
@@ -23,10 +23,10 @@ wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/p
 echo "Moving and replacing the lwjgl64.so file"
 mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
 
-password=$(zenity --password --title="Auth For Blocking Lunar")
-echo "$password" | sudo -S echo "Password entered."
-echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts
-echo "Launching Lunarclient"
+#password=$(zenity --password --title="Auth For Blocking Lunar")
+#echo "$password" | sudo -S echo "Password entered."
+#echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts
+#echo "Launching Lunarclient"
 cd "$HOME/.lunarclient/offline/multiver/"
 mangohud \
 gamemoderun \
@@ -48,6 +48,7 @@ gamemoderun \
     --version 1.20.1 \
     --accessToken 0 \
     --assetIndex 1.20 \
+    --launcherVersion 3.0.10 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \
     --texturesDir "$HOME/.lunarclient/textures" \
@@ -59,4 +60,4 @@ gamemoderun \
     --classpathDir . \
     --ichorClassPath "common-0.1.0-SNAPSHOT-all.jar,lunar-lang.jar,lunar-emote.jar,lunar.jar,optifine-0.1.0-SNAPSHOT-all.jar,modern-0.1.0-SNAPSHOT-all.jar,genesis-0.1.0-SNAPSHOT-all.jar"
 
-echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts
+#echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts

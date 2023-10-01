@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
+#LUNAR_BLOCKER="127.0.0.1 websocket.lunarclientprod.com" #block lunars websocket
 GRAAL_SETUP_FILE="$HOME/.graallcsetup.txt"
 
 if [ -f "$GRAAL_SETUP_FILE" ]; then
@@ -23,14 +23,16 @@ wget -q "https://raw.githubusercontent.com/Sensssssss/Lunar-Scripts/main/Linux/p
 echo "Moving and replacing the lwjgl64.so file"
 mv -f "$HOME/liblwjgl64.so" "$HOME/.lunarclient/offline/multiver/natives/liblwjgl64.so"
 
-password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
-echo "$password" | sudo -S echo "Password entered." #test
-echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
+#password=$(zenity --password --title="Auth For Blocking Lunar") #elevation
+#echo "$password" | sudo -S echo "Password entered." #test
+#echo "$LUNAR_BLOCKER" | sudo tee -a /etc/hosts #add to hosts
 
 echo "Launching Lunarclient"
+
 cd "$HOME/.lunarclient/offline/multiver/"
-mangohud \
 gamemoderun \
+#env LD_PRELOAD="libpthread.so.0 libGL.so.1" __GL_THREADED_OPTIMIZATIONS=0 \
+MANGOHUD_DLSYM=1 mangohud --dlsym \
 "$HOME/graal/bin/java" \
     --add-modules jdk.naming.dns \
     --add-exports jdk.naming.dns/com.sun.jndi.dns=java.naming \
@@ -49,6 +51,7 @@ gamemoderun \
     --version 1.7.10 \
     --accessToken 0 \
     --assetIndex 1.7.10 \
+    --launcherVersion 3.0.10 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \
     --texturesDir "$HOME/.lunarclient/textures" \
@@ -58,4 +61,4 @@ gamemoderun \
     --classpathDir . \
     --ichorClassPath "v1_7-0.1.0-SNAPSHOT-all.jar,lunar-lang.jar,lunar.jar,optifine-0.1.0-SNAPSHOT-all.jar,common-0.1.0-SNAPSHOT-all.jar"
 
-echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket
+#echo "$password" | sudo sed -i "/$LUNAR_BLOCKER/d" /etc/hosts #unblock lunar websocket

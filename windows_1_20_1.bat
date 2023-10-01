@@ -1,8 +1,8 @@
 @echo off
 color 4
 set GRAAL_SETUP_FILE=%USERPROFILE%\.graallcsetup.txt
-set "websocket=websocket.lunarclientprod.com"
-set "localh=127.0.0.1"
+::set "websocket=websocket.lunarclientprod.com"
+::set "localh=127.0.0.1"
 setlocal enabledelayedexpansion
 
 if exist "%GRAAL_SETUP_FILE%" (
@@ -23,14 +23,14 @@ if exist "%GRAAL_SETUP_FILE%" (
 )
 
 :: Check if the script is run as administrator
-net session >nul 2>&1
-if %errorLevel% == 0 (
-    echo Running as administrator
-) else (
-    echo Elevating script...
-    cmd /min /C "set __ELEVATED_CMDLINE=1 && %~dpnx0"
-    exit /b
-)
+::net session >nul 2>&1
+::if %errorLevel% == 0 (
+::    echo Running as administrator
+::) else (
+::    echo Elevating script...
+::    cmd /min /C "set __ELEVATED_CMDLINE=1 && %~dpnx0"
+::    exit /b
+::)
 
 copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
 echo %localh% %websocket%>> %SystemRoot%\System32\drivers\etc\hosts
@@ -67,6 +67,6 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --classpathDir . ^
     --ichorClassPath "common-0.1.0-SNAPSHOT-all.jar;lunar-lang.jar;lunar-emote.jar;lunar.jar;optifine-0.1.0-SNAPSHOT-all.jar;modern-0.1.0-SNAPSHOT-all.jar;genesis-0.1.0-SNAPSHOT-all.jar" ^
 
-    findstr /v "%localh% %websocket%" %SystemRoot%\System32\drivers\etc\hosts > %SystemRoot%\System32\drivers\etc\hosts_temp
-    move /y %SystemRoot%\System32\drivers\etc\hosts_temp %SystemRoot%\System32\drivers\etc\hosts
+::    findstr /v "%localh% %websocket%" %SystemRoot%\System32\drivers\etc\hosts > %SystemRoot%\System32\drivers\etc\hosts_temp
+ ::   move /y %SystemRoot%\System32\drivers\etc\hosts_temp %SystemRoot%\System32\drivers\etc\hosts
 pause
