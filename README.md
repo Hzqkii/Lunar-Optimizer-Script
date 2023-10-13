@@ -4,7 +4,7 @@ Welcome to the Lunar Launch Scripts repository. These scripts enhance the functi
 
 ![Actively Developed](https://img.shields.io/badge/Status-Actively%20Developed-brightgreen)
 
-For more detailed information and guidance, please visit our [wiki](https://github.com/your-username/your-repo/wiki).
+For more detailed information and guidance, please visit our [wiki](https://github.com/hzqkii/Lunar-Optimizer-Script/your-repo/wiki).
 
 ## Dependencies (Linux):
 
@@ -19,6 +19,6 @@ To make the most of these scripts on a Linux system, you'll need the following d
 For Windows users, the following dependencies are required:
 
 1. [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview)
-2. (Optional) You may consider using [bat2exe](https://github.com/your-username/bat2exe) to create a hidden command-line executable for added convenience.
+2. (Optional) You may consider using bat2exe to create a hidden command-line executable for added convenience.
 
 Feel free to explore and use these scripts to enhance your Lunar Client experience!
