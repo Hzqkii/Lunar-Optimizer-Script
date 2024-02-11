@@ -51,7 +51,7 @@ MANGOHUD_DLSYM=1 mangohud --dlsym \
     --version 1.7.10 \
     --accessToken 0 \
     --assetIndex 1.7.10 \
-    --launcherVersion 3.0.10 \
+    --launcherVersion 3.1.3 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \
     --texturesDir "$HOME/.lunarclient/textures" \

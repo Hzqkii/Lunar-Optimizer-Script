@@ -55,7 +55,7 @@ MANGOHUD_DLSYM=1 mangohud --dlsym \
     com.moonsworth.lunar.genesis.Genesis \
     --version 1.8.9 \
     --accessToken 0 \
-    --launcherVersion 3.1.0 \
+    --launcherVersion 3.1.3 \
     --assetIndex 1.8 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \

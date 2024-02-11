@@ -56,6 +56,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --version 1.20.1 ^
     --accessToken 0 ^
     --assetIndex 1.20 ^
+    --laucherVersion 3.1.3 ^
     --userProperties {} ^
     --gameDir "%USERPROFILE%\.minecraft" ^
     --texturesDir "%USERPROFILE%\.lunarclient\textures" ^

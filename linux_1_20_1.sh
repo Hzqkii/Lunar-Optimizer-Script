@@ -48,7 +48,7 @@ gamemoderun \
     --version 1.20.1 \
     --accessToken 0 \
     --assetIndex 1.20 \
-    --launcherVersion 3.0.10 \
+    --launcherVersion 3.1.3 \
     --userProperties {} \
     --gameDir "$HOME/.minecraft" \
     --texturesDir "$HOME/.lunarclient/textures" \

@@ -21,19 +21,6 @@ if exist "%GRAAL_SETUP_FILE%" (
     echo creating setup file to indicate that JRE is installed
     echo JRE is installed > "%GRAAL_SETUP_FILE%"
 )
-
-:: Check if the script is run as administrator
-::net session >nul 2>&1
-::if %errorLevel% == 0 (
-::    echo Running as administrator
-::) else (
-::    echo RUN SCRIPT AS ADMIN TO FIX ANNOYING POPUP
-::    pause
-::)
-
-::copy %SystemRoot%\System32\drivers\etc\hosts %SystemRoot%\System32\drivers\etc\hosts_backup.bak
-::echo %localh% %websocket%>> %SystemRoot%\System32\drivers\etc\hosts
-
 echo Launching Lunarclient
 cd "%USERPROFILE%\.lunarclient\offline\multiver\"
 "%USERPROFILE%\graal\bin\java" ^
@@ -55,7 +42,7 @@ cd "%USERPROFILE%\.lunarclient\offline\multiver\"
     --version 1.7.10 ^
     --accessToken 0 ^
     --assetIndex 1.7.10 ^
-    --launcherVersion 3.0.10 \
+    --launcherVersion 3.1.3 ^
     --userProperties {} ^
     --gameDir "%USERPROFILE%\.minecraft" ^
     --texturesDir "%USERPROFILE%\.lunarclient\textures" ^
